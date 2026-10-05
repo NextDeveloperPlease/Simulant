@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://7ms5b2n4eimn"]
+
+[ext_resource type="PackedScene" uid="uid://380ab8o3bg1s" path="res://Objects/creature_spawner.tscn" id="2_s1fp3"]
+[ext_resource type="PackedScene" uid="uid://dvxmhm8qp0gqi" path="res://Objects/food_spawner.tscn" id="3_ds7el"]
+
+[node name="World" type="Node2D"]
+
+[node name="FoodSpawner" parent="." instance=ExtResource("3_ds7el")]
+position = Vector2(946, 144)
+spawn_radius = 100.0
+
+[node name="CreatureSpawner" parent="." instance=ExtResource("2_s1fp3")]
+position = Vector2(410, 351)

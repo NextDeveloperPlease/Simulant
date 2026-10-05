@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://dj8e717ckal1w"]
+
+[ext_resource type="Texture2D" uid="uid://n7liosuf6x14" path="res://Assets/Sprite-0001.png" id="1_3cybq"]
+[ext_resource type="Script" path="res://Scripts/creature.gd" id="1_tjghq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_51475"]
+radius = 17.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rpfdr"]
+radius = 14.8661
+
+[node name="Creature" type="Node2D"]
+script = ExtResource("1_tjghq")
+health = 100
+max_health = 100
+food = 100
+max_food = 150
+min_food_for_heal = 50
+healing_rate = 10
+metabolism_speed = 5
+metabolism_amount = 10
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_3cybq")
+
+[node name="CollisionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea"]
+shape = SubResource("CircleShape2D_51475")
+
+[node name="VisionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VisionArea"]
+shape = SubResource("CircleShape2D_rpfdr")
+
+[connection signal="area_entered" from="CollisionArea" to="." method="_on_area_2d_area_entered"]
