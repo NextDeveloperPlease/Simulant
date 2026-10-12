@@ -2,7 +2,7 @@ extends Node2D
 
 @export var spawn_radius : float = 1.0
 @export var spawn_time : float = 1.0
-@export var max_creatures : int = 10
+@export var max_creatures : int = 100
 
 @onready var world = get_parent()
 
@@ -15,9 +15,9 @@ const offscreen = Vector2(-1000,1000)
 func _ready() -> void:
 	for i in range(max_creatures):
 		var creature = CREATURE_SCENE.instantiate()
-		creature.set_process(false)
-		creature.set_physics_process(false)
-		creature.visible = false
+		#creature.set_process(false)
+		#creature.set_physics_process(false)
+		#creature.visible = false
 		var health : int = randi_range(10,100)
 		var max_health : int = health
 		var food : int = randi_range(10, 100)
@@ -47,11 +47,14 @@ func _ready() -> void:
 		world.add_child.call_deferred(creature)
 
 func return_to_pool(target):
+	print(target)
 	target.global_position = offscreen
 	#target.toggle_monitoring()
 	target.set_process(false)
 	target.set_physics_process(false)
 	target.visible = false
+	target.collision_area.monitoring = false
+	target.collision_area.monitorable = false
 	creature_pool.append(target)
 	#print(food_pool)
 
@@ -68,6 +71,8 @@ func spawn_creature():
 	#new_creature.toggle_monitoring()
 	new_creature.set_process(true)
 	new_creature.set_physics_process(true)
+	new_creature.collision_area.monitoring = false
+	new_creature.collision_area.monitorable = false
 	new_creature.visible = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

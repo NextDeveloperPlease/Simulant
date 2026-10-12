@@ -60,6 +60,9 @@ func init_creature_values(
 	if c_color:
 		color = c_color
 	dest_object = random_dest
+	set_process(false)
+	set_physics_process(false)
+	visible = false
 
 #func toggle_monitoring():
 	#vision_area.monitoring = not vision_area.monitoring
@@ -161,11 +164,14 @@ func _ready() -> void:
 	in_vision['food'] = []
 	in_vision['mates'] = []
 	
-	collision_area.monitoring = true
+	#collision_area.monitoring = true
 	
 	vision_query_shape.radius = vision_radius
 	vision_query.shape = vision_query_shape
 	vision_query.collide_with_areas = true
+	
+	collision_area.monitoring = false
+	collision_area.monitorable = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
